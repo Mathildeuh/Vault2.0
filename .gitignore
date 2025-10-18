@@ -13,3 +13,15 @@ Thumbs.db
 
 # Logs
 *.log
+
+# Imágenes: sólo permitir bajo assets/
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.svg
+!assets/*.png
+!assets/*.jpg
+!assets/*.jpeg
+!assets/*.gif
+!assets/*.svg
