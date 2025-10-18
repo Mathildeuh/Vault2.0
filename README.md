@@ -1,5 +1,9 @@
 # Vault 2.0
 
+<p align="center">
+  <img src="assets/logo.svg" alt="Vault 2.0" width="720" />
+</p>
+
 [![CI](https://github.com/shalom25/Vault2.0/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/shalom25/Vault2.0/actions/workflows/build.yml) [![Release](https://img.shields.io/github/v/release/shalom25/Vault2.0?display_name=tag)](https://github.com/shalom25/Vault2.0/releases/latest) [![Downloads](https://img.shields.io/github/downloads/shalom25/Vault2.0/total)](https://github.com/shalom25/Vault2.0/releases)
 
 An internal economy provider compatible with the Vault API (no external `Vault.jar` required). It registers a Bukkit `Economy` service via the `ServicesManager`.
