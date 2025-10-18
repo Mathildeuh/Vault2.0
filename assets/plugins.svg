@@ -160,7 +160,7 @@
   </g>
 
   <!-- Menú interactivo -->
-  <g transform="translate(0,-30)">
+  <g transform="translate(0,0)">
     <text x="190" y="495" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif" font-weight="700" font-size="28" fill="#ffffff" opacity="0.98">Menú interactivo</text>
     <text x="190" y="525" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif" font-weight="400" font-size="22" fill="#ffffff" opacity="0.92">• Pagar a jugadores</text>
     <text x="190" y="555" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif" font-weight="400" font-size="22" fill="#ffffff" opacity="0.92">• Ver tu balance</text>
