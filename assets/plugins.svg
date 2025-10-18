@@ -21,48 +21,137 @@
       <stop offset="50%" stop-color="#d4af37"/>
       <stop offset="100%" stop-color="#b38f2f"/>
     </linearGradient>
+    <!-- Definiciones para monedas (igual que el logo) -->
+    <linearGradient id="coinEdge" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#ffe47a"/>
+      <stop offset="35%" stop-color="#e0b84a"/>
+      <stop offset="100%" stop-color="#8b6f1a"/>
+    </linearGradient>
+    <pattern id="reedPattern" patternUnits="userSpaceOnUse" width="4" height="16">
+      <rect x="0" y="0" width="1" height="16" fill="#e4c064" opacity="0.25"/>
+      <rect x="2" y="0" width="1" height="16" fill="#7d6518" opacity="0.18"/>
+    </pattern>
+    <radialGradient id="coinShadow" cx="50%" cy="70%" r="90%">
+      <stop offset="0%" stop-color="#000" stop-opacity="0.18"/>
+      <stop offset="60%" stop-color="#000" stop-opacity="0.06"/>
+      <stop offset="100%" stop-color="#000" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="faceGold" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#ffe98a"/>
+      <stop offset="55%" stop-color="#ffc94d"/>
+      <stop offset="100%" stop-color="#d39a2f"/>
+    </linearGradient>
+    <linearGradient id="rimGold" x1="0" x2="1" y1="0" y2="0">
+      <stop offset="0%" stop-color="#ffef9f"/>
+      <stop offset="60%" stop-color="#e0b84a"/>
+      <stop offset="100%" stop-color="#9a7a1f"/>
+    </linearGradient>
   </defs>
 
   <rect x="40" y="40" width="1120" height="548" rx="24" fill="url(#g)" filter="url(#shadow)"/>
 
-  <!-- Ícono cofre (consistente con el logo) -->
+  <!-- Cofre metálico con borde madera, similar al logo -->
   <g transform="translate(90,160)" filter="url(#shadow)">
-    <rect x="0" y="0" width="76" height="34" rx="4" fill="url(#woodTop)" stroke="#3b2c20" stroke-width="2"/>
-    <rect x="0" y="32" width="76" height="44" rx="4" fill="url(#woodBase)" stroke="#3b2c20" stroke-width="2"/>
-    <rect x="28" y="24" width="20" height="18" rx="2" fill="url(#metal)" stroke="#7a6115" stroke-width="1.5"/>
-    <rect x="34" y="28" width="8" height="6" rx="1" fill="#333333"/>
-    <rect x="19" y="6" width="2" height="20" fill="#6f3d1a" opacity="0.35"/>
-    <rect x="38" y="6" width="2" height="20" fill="#6f3d1a" opacity="0.35"/>
-    <rect x="57" y="6" width="2" height="20" fill="#6f3d1a" opacity="0.35"/>
-    <rect x="19" y="40" width="2" height="28" fill="#4b2a12" opacity="0.35"/>
-    <rect x="38" y="40" width="2" height="28" fill="#4b2a12" opacity="0.35"/>
-    <rect x="57" y="40" width="2" height="28" fill="#4b2a12" opacity="0.35"/>
+    <!-- Base madera -->
+    <rect x="-56" y="-26" width="112" height="52" rx="8" ry="8" fill="url(#woodBase)" stroke="#5a3c1b" stroke-width="2"/>
+    <!-- Tapa madera -->
+    <rect x="-56" y="-48" width="112" height="32" rx="8" ry="8" fill="url(#woodTop)" stroke="#5a3c1b" stroke-width="2"/>
+    <!-- Caja metal -->
+    <rect x="-44" y="-34" width="88" height="60" rx="6" ry="6" fill="url(#metal)" stroke="#7a642a" stroke-width="2"/>
+    <!-- Detalle ranura -->
+    <rect x="-6" y="-15" width="12" height="4" rx="2" ry="2" fill="#44330f" opacity="0.75"/>
+    <!-- Manija -->
+    <rect x="-12" y="10" width="24" height="8" rx="3" ry="3" fill="#b38f2f" stroke="#7a642a" stroke-width="2"/>
   </g>
 
-  <!-- Información del plugin: Comandos, Permisos y Propósito -->
+  <!-- Información del plugin: Comandos y Propósito -->
   <g fill="#ffffff">
-    <text x="190" y="120" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif" font-weight="700" font-size="56" letter-spacing="1.4">Vault 2.0 · Plugins</text>
+    <!-- Título y metadatos -->
+    <text x="190" y="120" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif" font-weight="700" font-size="44" opacity="0.98">Vault 2.0 (com.example:vault 2.0.0)</text>
+    <text x="190" y="152" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif" font-weight="400" font-size="20" opacity="0.85">Proveedor Economy estilo Vault integrado (sin depender de Vault.jar)</text>
 
     <!-- Comandos -->
     <text x="190" y="170" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif" font-weight="700" font-size="28" opacity="0.98">Comandos</text>
-    <text x="190" y="200" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif" font-weight="400" font-size="22" opacity="0.95">• /balance — muestra tu saldo</text>
-    <text x="190" y="230" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif" font-weight="400" font-size="22" opacity="0.95">• /pay &lt;jugador&gt; &lt;monto&gt; — pagar a otro jugador</text>
-    <text x="190" y="260" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif" font-weight="400" font-size="22" opacity="0.95">• /eco give|take|set &lt;jugador&gt; &lt;monto&gt;</text>
-    <text x="190" y="290" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif" font-weight="400" font-size="22" opacity="0.95">• /baltop — ranking de balances</text>
+    <text x="190" y="200" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif" font-weight="400" font-size="22" opacity="0.95">• /bal — muestra tu saldo</text>
+    <text x="190" y="230" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif" font-weight="400" font-size="22" opacity="0.95">• /pay &lt;jugador&gt; &lt;monto&gt; — paga a otro jugador</text>
+    <text x="190" y="260" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif" font-weight="400" font-size="22" opacity="0.95">• /eco give|take &lt;jugador&gt; &lt;monto&gt; — administra saldo</text>
+    <text x="190" y="290" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif" font-weight="400" font-size="22" opacity="0.95">• /eco set &lt;jugador&gt; &lt;monto&gt; — establece saldo</text>
     <text x="190" y="320" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif" font-weight="400" font-size="22" opacity="0.95">• /vault2 reload — recarga configuración</text>
 
-    <!-- Permisos -->
-    <text x="620" y="170" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif" font-weight="700" font-size="28" opacity="0.98">Permisos</text>
-    <text x="620" y="200" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif" font-weight="400" font-size="22" opacity="0.95">• vault2.user.balance</text>
-    <text x="620" y="230" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif" font-weight="400" font-size="22" opacity="0.95">• vault2.user.pay</text>
-    <text x="620" y="260" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif" font-weight="400" font-size="22" opacity="0.95">• vault2.admin.eco</text>
-    <text x="620" y="290" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif" font-weight="400" font-size="22" opacity="0.95">• vault2.admin.reload</text>
+    
+  </g>
+
+  <!-- Monedas (del logo) -->
+  <g transform="translate(930,170)" filter="url(#shadow)">
+    <!-- base ground shadow -->
+    <ellipse cx="30" cy="94" rx="72" ry="16" fill="#000" opacity="0"/>
+
+    <!-- left stack (4 coins) -->
+    <g transform="translate(-14,0)">
+      <rect x="5" y="68" width="50" height="18" rx="25" ry="11" fill="url(#coinEdge)" stroke="#5a3a00" stroke-width="2.2"/>
+      <rect x="5" y="68" width="50" height="18" fill="url(#reedPattern)" opacity="0.45"/>
+      <ellipse cx="30" cy="84" rx="24" ry="10" fill="url(#coinShadow)" opacity="0"/>
+      <ellipse cx="30" cy="76" rx="24" ry="11" fill="url(#faceGold)" stroke="#5a3a00" stroke-width="3.2"/>
+      <ellipse cx="30" cy="76" rx="21" ry="9.5" fill="none" stroke="url(#rimGold)" stroke-width="1.4" opacity="0.95"/>
+      <text x="30" y="80" font-family="'Segoe UI', Roboto, Arial, sans-serif" font-weight="800" font-size="16" text-anchor="middle" fill="#fff" opacity="0.9">$</text>
+
+      <rect x="5" y="54" width="50" height="18" rx="25" ry="11" fill="url(#coinEdge)" stroke="#5a3a00" stroke-width="2.2"/>
+      <rect x="5" y="54" width="50" height="18" fill="url(#reedPattern)" opacity="0.45"/>
+      <ellipse cx="30" cy="70" rx="24" ry="10" fill="url(#coinShadow)" opacity="0"/>
+      <ellipse cx="30" cy="62" rx="24" ry="11" fill="url(#faceGold)" stroke="#5a3a00" stroke-width="3.2"/>
+      <ellipse cx="30" cy="62" rx="21" ry="9.5" fill="none" stroke="url(#rimGold)" stroke-width="1.4" opacity="0.95"/>
+
+      <rect x="5" y="40" width="50" height="18" rx="25" ry="11" fill="url(#coinEdge)" stroke="#5a3a00" stroke-width="2.2"/>
+      <rect x="5" y="40" width="50" height="18" fill="url(#reedPattern)" opacity="0.45"/>
+      <ellipse cx="30" cy="56" rx="24" ry="10" fill="url(#coinShadow)" opacity="0"/>
+      <ellipse cx="30" cy="48" rx="24" ry="11" fill="url(#faceGold)" stroke="#5a3a00" stroke-width="3.2"/>
+      <ellipse cx="30" cy="48" rx="21" ry="9.5" fill="none" stroke="url(#rimGold)" stroke-width="1.4" opacity="0.95"/>
+
+      <rect x="5" y="26" width="50" height="18" rx="25" ry="11" fill="url(#coinEdge)" stroke="#5a3a00" stroke-width="2.2"/>
+      <rect x="5" y="26" width="50" height="18" fill="url(#reedPattern)" opacity="0.45"/>
+      <ellipse cx="30" cy="42" rx="24" ry="10" fill="url(#coinShadow)" opacity="0"/>
+      <ellipse cx="30" cy="34" rx="24" ry="11" fill="url(#faceGold)" stroke="#5a3a00" stroke-width="3.2"/>
+      <ellipse cx="30" cy="34" rx="21" ry="9.5" fill="none" stroke="url(#rimGold)" stroke-width="1.4" opacity="0.95"/>
+      <text x="30" y="38" font-family="'Segoe UI', Roboto, Arial, sans-serif" font-weight="800" font-size="16" text-anchor="middle" fill="#fff" opacity="0.95">$</text>
+    </g>
+
+    <!-- back stack (3 coins, slightly right shifted) -->
+    <g transform="translate(18,-6)" opacity="0.98">
+      <rect x="5" y="62" width="50" height="18" rx="25" ry="11" fill="url(#coinEdge)" stroke="#5a3a00" stroke-width="2.2"/>
+      <rect x="5" y="62" width="50" height="18" fill="url(#reedPattern)" opacity="0.45"/>
+      <ellipse cx="30" cy="78" rx="24" ry="10" fill="url(#coinShadow)" opacity="0"/>
+      <ellipse cx="30" cy="70" rx="24" ry="11" fill="url(#faceGold)" stroke="#5a3a00" stroke-width="3.2"/>
+      <ellipse cx="30" cy="70" rx="21" ry="9.5" fill="none" stroke="url(#rimGold)" stroke-width="1.4" opacity="0.95"/>
+
+      <rect x="5" y="48" width="50" height="18" rx="25" ry="11" fill="url(#coinEdge)" stroke="#5a3a00" stroke-width="2.2"/>
+      <rect x="5" y="48" width="50" height="18" fill="url(#reedPattern)" opacity="0.45"/>
+      <ellipse cx="30" cy="64" rx="24" ry="10" fill="url(#coinShadow)" opacity="0"/>
+      <ellipse cx="30" cy="56" rx="24" ry="11" fill="url(#faceGold)" stroke="#5a3a00" stroke-width="3.2"/>
+      <ellipse cx="30" cy="56" rx="21" ry="9.5" fill="none" stroke="url(#rimGold)" stroke-width="1.4" opacity="0.95"/>
+
+      <rect x="5" y="34" width="50" height="18" rx="25" ry="11" fill="url(#coinEdge)" stroke="#5a3a00" stroke-width="2.2"/>
+      <rect x="5" y="34" width="50" height="18" fill="url(#reedPattern)" opacity="0.45"/>
+      <ellipse cx="30" cy="50" rx="24" ry="10" fill="url(#coinShadow)" opacity="0"/>
+      <ellipse cx="30" cy="42" rx="24" ry="11" fill="url(#faceGold)" stroke="#5a3a00" stroke-width="3.2"/>
+      <ellipse cx="30" cy="42" rx="21" ry="9.5" fill="none" stroke="url(#rimGold)" stroke-width="1.4" opacity="0.95"/>
+      <text x="30" y="46" font-family="'Segoe UI', Roboto, Arial, sans-serif" font-weight="800" font-size="16" text-anchor="middle" fill="#fff" opacity="0.95">$</text>
+    </g>
+
+    <!-- front tilted coin -->
+    <g transform="translate(92,54) rotate(-22)">
+      <rect x="-25" y="-8" width="50" height="18" rx="25" ry="11" fill="url(#coinEdge)" stroke="#5a3a00" stroke-width="2.2"/>
+      <rect x="-25" y="-8" width="50" height="18" fill="url(#reedPattern)" opacity="0.45"/>
+      <ellipse cx="0" cy="8" rx="24" ry="10" fill="url(#coinShadow)" opacity="0"/>
+      <ellipse cx="0" cy="0" rx="24" ry="11" fill="url(#faceGold)" stroke="#5a3a00" stroke-width="3.2"/>
+      <ellipse cx="0" cy="0" rx="21" ry="9.5" fill="none" stroke="url(#rimGold)" stroke-width="1.4" opacity="0.95"/>
+      <text x="0" y="4" font-family="'Segoe UI', Roboto, Arial, sans-serif" font-weight="800" font-size="16" text-anchor="middle" fill="#fff" opacity="0.95">$</text>
+    </g>
   </g>
 
   <!-- Para qué sirve -->
   <g>
     <text x="190" y="380" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif" font-weight="700" font-size="28" fill="#ffffff" opacity="0.98">Para qué sirve</text>
-    <text x="190" y="410" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif" font-weight="400" font-size="22" fill="#ffffff" opacity="0.92">Proveedor Economy estilo Vault integrado; reemplaza depender de Vault.jar.</text>
+    <text x="190" y="410" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif" font-weight="400" font-size="22" fill="#ffffff" opacity="0.92">Proveedor Economy estilo Vault integrado.</text>
     <text x="190" y="440" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif" font-weight="400" font-size="22" fill="#ffffff" opacity="0.92">Gestiona saldos, pagos entre jugadores y administración mediante /eco.</text>
     <text x="190" y="470" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif" font-weight="400" font-size="22" fill="#ffffff" opacity="0.92">API compatible con Vault para integrarse con otros plugins y placeholders.</text>
   </g>
