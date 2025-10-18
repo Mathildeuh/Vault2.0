@@ -25,14 +25,21 @@ jobs:
         run: |
           mkdir -p assets
           rsvg-convert -w 1920 -h 480 assets/logo.svg > assets/logo.png
-      - name: Commit PNG if changed
+      - name: Install ImageMagick
         run: |
-          if git status --porcelain | grep 'assets/logo.png'; then
+          sudo apt-get update
+          sudo apt-get install -y imagemagick
+      - name: Convert PNG to JPG
+        run: |
+          convert assets/logo.png -background white -alpha remove -quality 92 assets/logo.jpg
+      - name: Commit PNG/JPG if changed
+        run: |
+          if git status --porcelain | grep -E 'assets/logo\.(png|jpg)'; then
             git config user.name "github-actions[bot]"
             git config user.email "github-actions[bot]@users.noreply.github.com"
-            git add assets/logo.png
-            git commit -m "CI: generar assets/logo.png desde SVG [skip ci]"
+            git add assets/logo.png assets/logo.jpg
+            git commit -m "CI: generar assets/logo.png y assets/logo.jpg desde SVG [skip ci]"
             git push origin HEAD:${{ github.ref_name }}
           else
-            echo "No changes in assets/logo.png"
+            echo "No changes in assets/logo.png or assets/logo.jpg"
           fi
