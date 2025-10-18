@@ -73,13 +73,13 @@
     <!-- Título -->
     <text x="190" y="120" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif" font-weight="700" font-size="48" opacity="0.98">Vault 2.0 · Plugins</text>
 
-    <!-- Comandos -->
-    <text x="190" y="170" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif" font-weight="700" font-size="28" opacity="0.98">Comandos</text>
-    <text x="190" y="200" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif" font-weight="400" font-size="22" opacity="0.95">• /bal — muestra tu saldo</text>
-    <text x="190" y="230" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif" font-weight="400" font-size="22" opacity="0.95">• /pay &lt;jugador&gt; &lt;monto&gt; — paga a otro jugador</text>
-    <text x="190" y="260" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif" font-weight="400" font-size="22" opacity="0.95">• /eco give|take &lt;jugador&gt; &lt;monto&gt; — administra saldo</text>
-    <text x="190" y="290" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif" font-weight="400" font-size="22" opacity="0.95">• /eco set &lt;jugador&gt; &lt;monto&gt; — establece saldo</text>
-    <text x="190" y="320" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif" font-weight="400" font-size="22" opacity="0.95">• /vault2 reload — recarga configuración</text>
+    <!-- Commands -->
+    <text x="190" y="170" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif" font-weight="700" font-size="28" opacity="0.98">Commands</text>
+    <text x="190" y="200" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif" font-weight="400" font-size="22" opacity="0.95">• /balance — shows your balance</text>
+    <text x="190" y="230" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif" font-weight="400" font-size="22" opacity="0.95">• /pay &lt;player&gt; &lt;amount&gt; — pay another player</text>
+    <text x="190" y="260" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif" font-weight="400" font-size="22" opacity="0.95">• /eco give|take &lt;player&gt; &lt;amount&gt; — administer balance</text>
+    <text x="190" y="290" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif" font-weight="400" font-size="22" opacity="0.95">• /eco set &lt;player&gt; &lt;amount&gt; — set balance</text>
+    <text x="190" y="320" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif" font-weight="400" font-size="22" opacity="0.95">• /vault reload — reload configuration</text>
 
     
   </g>
@@ -151,19 +151,19 @@
     </g>
   </g>
 
-  <!-- Para qué sirve -->
+  <!-- What it does -->
   <g transform="translate(0,-50)">
-    <text x="190" y="380" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif" font-weight="700" font-size="28" fill="#ffffff" opacity="0.98">Para qué sirve</text>
-    <text x="190" y="410" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif" font-weight="400" font-size="22" fill="#ffffff" opacity="0.92">Proveedor Economy estilo Vault integrado.</text>
-    <text x="190" y="440" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif" font-weight="400" font-size="22" fill="#ffffff" opacity="0.92">Gestiona saldos, pagos entre jugadores y administración mediante /eco.</text>
-    <text x="190" y="470" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif" font-weight="400" font-size="22" fill="#ffffff" opacity="0.92">API compatible con Vault para integrarse con otros plugins y placeholders.</text>
+    <text x="190" y="380" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif" font-weight="700" font-size="28" fill="#ffffff" opacity="0.98">What it does</text>
+    <text x="190" y="410" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif" font-weight="400" font-size="22" fill="#ffffff" opacity="0.92">Integrated Vault-style Economy provider.</text>
+    <text x="190" y="440" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif" font-weight="400" font-size="22" fill="#ffffff" opacity="0.92">Manages balances, player-to-player payments, and admin via /eco.</text>
+    <text x="190" y="470" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif" font-weight="400" font-size="22" fill="#ffffff" opacity="0.92">Vault-compatible API to integrate with other plugins and placeholders.</text>
   </g>
 
-  <!-- Menú interactivo -->
+  <!-- Interactive menu -->
   <g transform="translate(0,-20)">
-    <text x="190" y="495" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif" font-weight="700" font-size="28" fill="#ffffff" opacity="0.98">Menú interactivo</text>
-    <text x="190" y="525" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif" font-weight="400" font-size="22" fill="#ffffff" opacity="0.92">• Pagar a jugadores</text>
-    <text x="190" y="555" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif" font-weight="400" font-size="22" fill="#ffffff" opacity="0.92">• Ver tu balance</text>
-    <text x="190" y="585" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif" font-weight="400" font-size="22" fill="#ffffff" opacity="0.92">• Cobrar/retirar ingresos</text>
+    <text x="190" y="495" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif" font-weight="700" font-size="28" fill="#ffffff" opacity="0.98">Interactive menu</text>
+    <text x="190" y="525" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif" font-weight="400" font-size="22" fill="#ffffff" opacity="0.92">• Pay players</text>
+    <text x="190" y="555" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif" font-weight="400" font-size="22" fill="#ffffff" opacity="0.92">• View your balance</text>
+    <text x="190" y="585" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif" font-weight="400" font-size="22" fill="#ffffff" opacity="0.92">• Collect/withdraw income</text>
   </g>
 </svg>
