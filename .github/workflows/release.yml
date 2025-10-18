@@ -18,10 +18,17 @@ jobs:
           cache: 'maven'
       - name: Build with Maven
         run: mvn -B -DskipTests package
+      - name: Generate PNG logo from SVG
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y librsvg2-bin
+          rsvg-convert -w 1024 -h 256 assets/logo.svg -o assets/logo.png
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
         with:
-          files: target/*.jar
+          files: |
+            target/*.jar
+            assets/logo.png
           generate_release_notes: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
