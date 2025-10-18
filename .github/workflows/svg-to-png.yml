@@ -24,7 +24,11 @@ jobs:
       - name: Convert SVG to PNG
         run: |
           mkdir -p assets
-          rsvg-convert -w 1920 -h 480 assets/logo.svg > assets/logo.png
+          # logo: cuadrado 1024x1024 (mantener aspecto y acolchar al centro)
+          rsvg-convert -w 1024 assets/logo.svg > assets/logo_tmp.png
+          convert assets/logo_tmp.png -background none -gravity center -extent 1024x1024 assets/logo.png
+          rm -f assets/logo_tmp.png
+          # plugins: mantener tamaño existente
           rsvg-convert -w 1200 -h 628 assets/plugins.svg > assets/plugins.png
       - name: Install ImageMagick
         run: |
