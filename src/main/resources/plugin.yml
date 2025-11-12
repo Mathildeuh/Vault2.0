@@ -14,7 +14,7 @@ commands:
     aliases: [pagar]
   vault:
     description: Admin command for Vault
-    usage: /vault reload|update
+    usage: /vault reload
 permissions:
   vault.balance:
     description: Allows using /balance
