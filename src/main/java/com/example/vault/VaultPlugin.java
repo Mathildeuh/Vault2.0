@@ -255,6 +255,10 @@ public class VaultPlugin extends JavaPlugin implements Listener {
                 updateAvailable = !equalsVersion(remoteVersion, current);
                 if (updateAvailable && (lastAnnouncedVersion == null || !lastAnnouncedVersion.equals(remoteVersion))) {
                     notifyOnlineOps(remoteVersion);
+                    // También avisar en consola al iniciar, incluso si no hay operadores conectados
+                    String normRemote = normalizeVersion(remoteVersion);
+                    String normCurrent = normalizeVersion(current);
+                    getLogger().info("Update available on startup: remote=" + normRemote + " current=" + normCurrent + " | " + UPDATE_LINK);
                     lastAnnouncedVersion = remoteVersion;
                 }
             }
