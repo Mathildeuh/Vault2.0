@@ -25,6 +25,8 @@ public class VaultPlugin extends JavaPlugin implements Listener {
     private volatile boolean updateAvailable = false;
     private volatile String remoteVersion = null;
     private volatile String lastAnnouncedVersion = null;
+    private volatile long lastOnJoinUpdateCheckMs = 0L;
+    private static final long ON_JOIN_CHECK_COOLDOWN_MS = 5 * 60 * 1000L; // 5 minutos
     private static final String UPDATE_LINK = "https://www.spigotmc.org/resources/vault-2-0-economy-plugins-%E2%9D%97updated-to-latest-versions%E2%9D%97.129605/";
     private static final String SPIGOT_UPDATE_URL = "https://api.spigotmc.org/legacy/update.php?resource=129605";
 
@@ -304,11 +306,18 @@ public class VaultPlugin extends JavaPlugin implements Listener {
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
+        Player p = event.getPlayer();
+        if (!p.isOp()) return;
+        // Si ya sabemos que hay actualización, avisa de inmediato
         if (updateAvailable) {
-            Player p = event.getPlayer();
-            if (p.isOp()) {
-                p.sendMessage(buildUpdateMessage(remoteVersion));
-            }
+            p.sendMessage(buildUpdateMessage(remoteVersion));
+            return;
+        }
+        // Si no hay información remota aún, o ha pasado el cooldown, fuerza un chequeo
+        long now = System.currentTimeMillis();
+        if ((remoteVersion == null) || (now - lastOnJoinUpdateCheckMs >= ON_JOIN_CHECK_COOLDOWN_MS)) {
+            lastOnJoinUpdateCheckMs = now;
+            runUpdateCheckAndAnnounce(p);
         }
     }
 }
