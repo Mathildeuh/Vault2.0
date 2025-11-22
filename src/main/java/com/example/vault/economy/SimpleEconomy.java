@@ -1,5 +1,6 @@
 package com.example.vault.economy;
 
+import com.example.vault.Database;
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.economy.EconomyResponse;
 import net.milkbowl.vault.economy.EconomyResponse.ResponseType;
@@ -9,6 +10,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Map;
@@ -16,11 +18,17 @@ import java.util.UUID;
 
 public class SimpleEconomy implements Economy {
     private final Plugin plugin;
+    private final Database database; // may be null
     private final Map<UUID, Double> balances = new HashMap<>();
     private final DecimalFormat formatter = new DecimalFormat("#,##0.00");
 
     public SimpleEconomy(Plugin plugin) {
+        this(plugin, null);
+    }
+
+    public SimpleEconomy(Plugin plugin, Database database) {
         this.plugin = plugin;
+        this.database = database;
     }
 
     @Override
@@ -76,6 +84,13 @@ public class SimpleEconomy implements Economy {
     @Override
     public boolean createPlayerAccount(OfflinePlayer player) {
         balances.putIfAbsent(player.getUniqueId(), 0.0);
+        if (database != null && database.isEnabled()) {
+            try {
+                database.saveBalance(player.getUniqueId(), 0.0);
+            } catch (SQLException e) {
+                plugin.getLogger().warning("Failed to create account in DB: " + e.getMessage());
+            }
+        }
         return true;
     }
 
@@ -100,15 +115,31 @@ public class SimpleEconomy implements Economy {
         if (bal < amount) {
             return new EconomyResponse(0.0, bal, ResponseType.FAILURE, "Insufficient funds");
         }
-        balances.put(player.getUniqueId(), bal - amount);
-        return new EconomyResponse(amount, bal - amount, ResponseType.SUCCESS, "");
+        double newBal = bal - amount;
+        balances.put(player.getUniqueId(), newBal);
+        if (database != null && database.isEnabled()) {
+            try {
+                database.saveBalance(player.getUniqueId(), newBal);
+            } catch (SQLException e) {
+                plugin.getLogger().warning("Failed to save balance after withdraw: " + e.getMessage());
+            }
+        }
+        return new EconomyResponse(amount, newBal, ResponseType.SUCCESS, "");
     }
 
     @Override
     public EconomyResponse depositPlayer(OfflinePlayer player, double amount) {
         double bal = getBalance(player);
-        balances.put(player.getUniqueId(), bal + amount);
-        return new EconomyResponse(amount, bal + amount, ResponseType.SUCCESS, "");
+        double newBal = bal + amount;
+        balances.put(player.getUniqueId(), newBal);
+        if (database != null && database.isEnabled()) {
+            try {
+                database.saveBalance(player.getUniqueId(), newBal);
+            } catch (SQLException e) {
+                plugin.getLogger().warning("Failed to save balance after deposit: " + e.getMessage());
+            }
+        }
+        return new EconomyResponse(amount, newBal, ResponseType.SUCCESS, "");
     }
 
     @Override
@@ -212,6 +243,17 @@ public class SimpleEconomy implements Economy {
 
     // Persistence methods
     public void load() throws IOException {
+        if (database != null && database.isEnabled()) {
+            try {
+                Map<UUID, Double> fromDb = database.loadAllBalances();
+                balances.clear();
+                balances.putAll(fromDb);
+                return;
+            } catch (SQLException e) {
+                plugin.getLogger().warning("Failed to load balances from DB: " + e.getMessage());
+            }
+        }
+        // Fallback to YAML file
         File file = new File(plugin.getDataFolder(), "balances.yml");
         if (!file.exists()) return;
         YamlConfiguration config = YamlConfiguration.loadConfiguration(file);
@@ -227,6 +269,17 @@ public class SimpleEconomy implements Economy {
     }
 
     public void save() throws IOException {
+        if (database != null && database.isEnabled()) {
+            // save every balance
+            for (Map.Entry<UUID, Double> entry : balances.entrySet()) {
+                try {
+                    database.saveBalance(entry.getKey(), entry.getValue());
+                } catch (SQLException e) {
+                    plugin.getLogger().warning("Failed to save balance to DB: " + e.getMessage());
+                }
+            }
+            return;
+        }
         File file = new File(plugin.getDataFolder(), "balances.yml");
         YamlConfiguration config = new YamlConfiguration();
         for (Map.Entry<UUID, Double> entry : balances.entrySet()) {
@@ -236,6 +289,9 @@ public class SimpleEconomy implements Economy {
     }
 
     public void close() {
-        // No resources to close
+        if (database != null) {
+            database.close();
+        }
     }
 }
+

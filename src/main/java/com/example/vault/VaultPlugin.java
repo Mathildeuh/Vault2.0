@@ -30,6 +30,8 @@ public class VaultPlugin extends JavaPlugin implements Listener {
     private static final String UPDATE_LINK = "https://www.spigotmc.org/resources/vault-2-0-economy-plugins-%E2%9D%97updated-to-latest-versions%E2%9D%97.129605/";
     private static final String SPIGOT_UPDATE_URL = "https://api.spigotmc.org/legacy/update.php?resource=129605";
 
+    private Database database;
+
     @Override
     public void onEnable() {
         // Ensure data folder
@@ -45,8 +47,11 @@ public class VaultPlugin extends JavaPlugin implements Listener {
         String lang = getConfig().getString("language", "en");
         messages = new Messages(this, lang);
 
+        // Initialize Database if configured
+        database = new Database(this);
+
         // Create our internal Economy provider and register it in ServicesManager
-        SimpleEconomy provider = new SimpleEconomy(this);
+        SimpleEconomy provider = new SimpleEconomy(this, database);
         // Load persisted balances
         try {
             provider.load();
@@ -70,7 +75,7 @@ public class VaultPlugin extends JavaPlugin implements Listener {
         }
         if (getCommand("pay") != null) {
             // After economy initialization
-            ChargeRequestService chargeRequestService = new ChargeRequestService(this, messages);
+            ChargeRequestService chargeRequestService = new ChargeRequestService(this, messages, database);
             getServer().getPluginManager().registerEvents(chargeRequestService, this);
             payMenuService = new PayMenuService(this, economy, messages, chargeRequestService);
             getServer().getPluginManager().registerEvents(payMenuService, this);
@@ -152,6 +157,9 @@ public class VaultPlugin extends JavaPlugin implements Listener {
             // Close SQL connection if used
             ((SimpleEconomy) economy).close();
         }
+        // Close database
+        if (database != null) database.close();
+
         getLogger().info(messages.get("plugin.disabled"));
     }
 

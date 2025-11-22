@@ -1,0 +1,91 @@
+pay:
+  # Messages de commande utilisés par le code
+  only_players: "Seuls les joueurs peuvent utiliser /pay."
+  no_permission: "Vous n'avez pas la permission d'utiliser /pay."
+  invalid_amount: "Montant invalide."
+  player_offline: "Le joueur %player% est hors ligne ; la demande n'a pas été livrée."
+  amount_too_small: "Le montant doit être au moins %min%."
+  amount_too_large: "Le montant doit être au plus %max%."
+  not_enough_money: "Fonds insuffisants."
+  withdraw_failed: "Impossible de retirer."
+  sent_ok: "Vous avez payé %amount% à %player%."
+  received_ok: "Vous avez reçu %amount% de %player%."
+
+  # UI/menu et autres messages
+  menu:
+    title_main: "Sélectionner un joueur"
+    title_player: "Actions : %player%"
+    nav:
+      prev_name: "&aPage précédente"
+      next_name: "&aPage suivante"
+    item:
+      pay: "Payer"
+      view_balance: "Voir le solde"
+      charge: "Facturer"
+  prompt:
+    enter_amount_pay: "Tapez le montant à payer à %player% dans le chat."
+    enter_amount_charge: "Tapez le montant que vous voulez facturer à %player% dans le chat."
+  error:
+    player_not_found: "Joueur introuvable : %player%"
+    invalid_amount: "Montant invalide."
+    positive_only: "Le montant doit être positif."
+    min_amount: "Le montant doit être au moins %min%."
+    max_amount: "Le montant doit être au plus %max%."
+    insufficient_funds: "Fonds insuffisants."
+    withdraw_error: "Impossible de retirer : %error%"
+    deposit_error: "Impossible de déposer : %error%"
+    player_offline: "Le joueur %player% est hors ligne ; la demande n'a pas été livrée."
+  success:
+    sender: "Vous avez payé %amount% à %player%."
+
+  view:
+    balance: "Solde de %player% : %amount%"
+    money_label: "Argent"
+  request:
+    prefix: "Demande de paiement préparée : "
+    click: "Cliquez ici pour payer %player% %amount%"
+    hover: "Exécutez /pay %player% %amount%"
+    sent: "Demande envoyée à %player% pour %amount%."
+    stored: "Demande enregistrée ; sera livrée lorsque %player% se connectera."
+  pending:
+    header: "Vous avez %count% demandes de paiement en attente."
+    limit_notice: "Affichage de %shown% sur %total% ; le reste sera livré plus tard."
+
+cmd:
+  pay:
+    only_players: "Seuls les joueurs peuvent utiliser /pay."
+    no_permission: "Vous n'avez pas la permission d'utiliser /pay."
+    usage: "Usage : /pay <player> <amount> (ou /pay pour ouvrir le menu, /pay <player> ouvre le sous-menu)"
+    player_not_found: "Joueur introuvable : %player%"
+    invalid_amount: "Montant invalide : %amount%"
+    positive_only: "Le montant doit être positif."
+  balance:
+    only_players: "Cette commande est réservée aux joueurs."
+    no_permission: "Vous n'avez pas la permission d'utiliser /balance."
+    your_balance: "Votre solde : %amount%"
+  vault:
+    no_permission: "Vous n'avez pas la permission de recharger le plugin."
+
+# Clés attendues par le service de menu (au niveau racine)
+menu:
+  title_main: "Sélectionner un joueur"
+  title_player: "Actions : %player%"
+  target_player: "Sélectionner la cible"
+  target_player_lore: "Cliquez pour choisir un joueur"
+  enter_amount: "Saisir un montant"
+  enter_amount_lore: "Tapez le montant dans le chat"
+
+# Clés attendues par la commande balance (au niveau racine)
+balance:
+  no_permission: "Vous n'avez pas la permission d'utiliser /balance."
+  your_balance: "Votre solde : %amount%"
+
+plugin:
+  enabled: "Économie interne enregistrée sans dépendre de Vault.jar"
+  disabled: "Vault (économie interne) désactivé."
+  reloaded: "Configuration et messages rechargés (langue : %lang%)."
+
+prefix: "&b[Vault]&r "
+
+economy:
+  bank_not_supported: "La gestion de banques n'est pas implémentée"

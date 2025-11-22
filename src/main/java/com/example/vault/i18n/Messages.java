@@ -26,6 +26,7 @@ public class Messages {
 
     public void reload(String language) {
         saveResourceOnce("messages_en.yml");
+        saveResourceOnce("messages_fr.yml");
         saveResourceOnce("messages_es.yml");
         this.fallback = YamlConfiguration.loadConfiguration(new File(plugin.getDataFolder(), "messages_en.yml"));
         File langFile = new File(plugin.getDataFolder(), "messages_" + language.toLowerCase() + ".yml");

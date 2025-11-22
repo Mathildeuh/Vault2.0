@@ -1,5 +1,6 @@
 package com.example.vault.menu;
 
+import com.example.vault.Database;
 import com.example.vault.i18n.Messages;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -20,6 +21,7 @@ import net.md_5.bungee.api.chat.BaseComponent;
 public class ChargeRequestService implements Listener {
     private final Plugin plugin;
     private final Messages messages;
+    private final Database database;
 
     private final Map<String, List<PendingRequest>> pendingByRecipient = new ConcurrentHashMap<>();
     private final Set<String> awaitingAmount = ConcurrentHashMap.newKeySet();
@@ -29,29 +31,71 @@ public class ChargeRequestService implements Listener {
     private final Map<String, Mode> modeBySender = new ConcurrentHashMap<>();
 
     public ChargeRequestService(Plugin plugin, Messages messages) {
+        this(plugin, messages, null);
+    }
+
+    public ChargeRequestService(Plugin plugin, Messages messages, Database database) {
         this.plugin = plugin;
         this.messages = messages;
+        this.database = database;
     }
 
     private static class PendingRequest {
+        final long id; // -1 si non persistant
         final String sender;
         final double amount;
 
         PendingRequest(String sender, double amount) {
+            this(-1, sender, amount);
+        }
+
+        PendingRequest(long id, String sender, double amount) {
+            this.id = id;
             this.sender = sender;
             this.amount = amount;
         }
     }
 
     public void addPending(String recipientName, String senderName, double amount) {
+        // Store in memory
         pendingByRecipient.computeIfAbsent(recipientName.toLowerCase(Locale.ROOT), k -> new ArrayList<>())
                 .add(new PendingRequest(senderName, amount));
+        // Persist in DB if enabled
+        if (database != null && database.isEnabled()) {
+            try {
+                long id = database.insertPendingRequest(recipientName.toLowerCase(Locale.ROOT), senderName, amount);
+                // replace the last added with a version that has id
+                List<PendingRequest> list = pendingByRecipient.get(recipientName.toLowerCase(Locale.ROOT));
+                if (list != null && !list.isEmpty()) {
+                    list.set(list.size() - 1, new PendingRequest(id, senderName, amount));
+                }
+            } catch (Exception e) {
+                plugin.getLogger().warning("Failed to persist charge request: " + e.getMessage());
+            }
+        }
     }
 
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
-        List<PendingRequest> list = pendingByRecipient.get(player.getName().toLowerCase(Locale.ROOT));
+        String key = player.getName().toLowerCase(Locale.ROOT);
+        // Load from DB if enabled and not already in memory
+        if (database != null && database.isEnabled() && !pendingByRecipient.containsKey(key)) {
+            try {
+                java.util.List<Database.ChargeRequest> fromDb = database.loadPendingRequests(key);
+                if (fromDb != null && !fromDb.isEmpty()) {
+                    List<PendingRequest> list = new ArrayList<>();
+                    for (Database.ChargeRequest cr : fromDb) {
+                        list.add(new PendingRequest(cr.id, cr.sender, cr.amount));
+                    }
+                    pendingByRecipient.put(key, list);
+                }
+            } catch (Exception e) {
+                plugin.getLogger().warning("Failed to load pending requests for " + key + ": " + e.getMessage());
+            }
+        }
+
+        List<PendingRequest> list = pendingByRecipient.get(key);
         if (list == null || list.isEmpty()) return;
         int max = plugin.getConfig().getInt("pay_pending.max_on_join", 5);
         int total = list.size();
@@ -77,11 +121,19 @@ public class ChargeRequestService implements Listener {
             clickable.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new BaseComponent[]{new TextComponent(messages.format("pay.request.hover", m2))}));
             combined.addExtra(clickable);
             player.spigot().sendMessage(combined);
+            // If delivered and persisted, delete from DB
+            if (pr.id > 0 && database != null && database.isEnabled()) {
+                try {
+                    database.deletePendingById(pr.id);
+                } catch (Exception e) {
+                    plugin.getLogger().warning("Failed to delete delivered pending request id=" + pr.id + ": " + e.getMessage());
+                }
+            }
         }
         if (total > shown) {
-            pendingByRecipient.put(player.getName().toLowerCase(Locale.ROOT), new ArrayList<>(list.subList(shown, total)));
+            pendingByRecipient.put(key, new ArrayList<>(list.subList(shown, total)));
         } else {
-            pendingByRecipient.remove(player.getName().toLowerCase(Locale.ROOT));
+            pendingByRecipient.remove(key);
         }
     }
 
@@ -224,3 +276,4 @@ public class ChargeRequestService implements Listener {
         event.setCancelled(true);
     }
 }
+
