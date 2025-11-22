@@ -48,7 +48,11 @@ public class VaultPlugin extends JavaPlugin implements Listener {
         // Create our internal Economy provider and register it in ServicesManager
         SimpleEconomy provider = new SimpleEconomy(this);
         // Load persisted balances
-        provider.load();
+        try {
+            provider.load();
+        } catch (java.io.IOException ex) {
+            getLogger().warning("Failed to load balances: " + ex.getMessage());
+        }
         this.economy = provider;
         getServer().getServicesManager().register(Economy.class, provider, this, ServicePriority.Highest);
 

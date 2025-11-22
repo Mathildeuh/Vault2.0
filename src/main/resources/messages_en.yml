@@ -1,4 +1,4 @@
-# English messages
+  messages_en.yml# English messages
 pay:
   # Command messages expected by code
   only_players: "Only players can use /pay."

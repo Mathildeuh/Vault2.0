@@ -5,7 +5,10 @@ import net.milkbowl.vault.economy.EconomyResponse;
 import net.milkbowl.vault.economy.EconomyResponse.ResponseType;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.configuration.file.YamlConfiguration;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Map;
@@ -206,4 +209,33 @@ public class SimpleEconomy implements Economy {
     public EconomyResponse bankDeposit(String bank, org.bukkit.OfflinePlayer player, double amount) { return new net.milkbowl.vault.economy.EconomyResponse(0,0,net.milkbowl.vault.economy.EconomyResponse.ResponseType.NOT_IMPLEMENTED,"Not implemented"); }
     public EconomyResponse isBankOwner(String bank, org.bukkit.OfflinePlayer player) { return new net.milkbowl.vault.economy.EconomyResponse(0,0,net.milkbowl.vault.economy.EconomyResponse.ResponseType.NOT_IMPLEMENTED,"Not implemented"); }
     public EconomyResponse isBankMember(String bank, org.bukkit.OfflinePlayer player) { return new net.milkbowl.vault.economy.EconomyResponse(0,0,net.milkbowl.vault.economy.EconomyResponse.ResponseType.NOT_IMPLEMENTED,"Not implemented"); }
+
+    // Persistence methods
+    public void load() throws IOException {
+        File file = new File(plugin.getDataFolder(), "balances.yml");
+        if (!file.exists()) return;
+        YamlConfiguration config = YamlConfiguration.loadConfiguration(file);
+        for (String key : config.getKeys(false)) {
+            try {
+                UUID uuid = UUID.fromString(key);
+                double balance = config.getDouble(key);
+                balances.put(uuid, balance);
+            } catch (Exception e) {
+                plugin.getLogger().warning("Invalid balance entry: " + key);
+            }
+        }
+    }
+
+    public void save() throws IOException {
+        File file = new File(plugin.getDataFolder(), "balances.yml");
+        YamlConfiguration config = new YamlConfiguration();
+        for (Map.Entry<UUID, Double> entry : balances.entrySet()) {
+            config.set(entry.getKey().toString(), entry.getValue());
+        }
+        config.save(file);
+    }
+
+    public void close() {
+        // No resources to close
+    }
 }
