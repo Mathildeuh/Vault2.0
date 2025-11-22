@@ -8,6 +8,7 @@ commands:
   balance:
     description: Show your current balance
     usage: /balance
+    aliases: [money, bal]
   pay:
     description: Send money to another player
     usage: /pay <player> <amount>
@@ -15,6 +16,7 @@ commands:
   vault:
     description: Admin command for Vault
     usage: /vault reload
+
 permissions:
   vault.balance:
     description: Allows using /balance

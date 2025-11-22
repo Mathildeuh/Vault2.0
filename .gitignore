@@ -25,3 +25,6 @@ Thumbs.db
 !assets/*.jpeg
 !assets/*.gif
 !assets/*.svg
+
+build/
+.gradle/
